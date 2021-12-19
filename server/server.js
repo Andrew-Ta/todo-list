@@ -19,6 +19,9 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(express.json({extended: false}));
 app.get("/", (req,res) => res.send("Server up and running"));
 
+//use routes
+app.use("/api/todo", todo);
+
 // set up port
 const PORT = process.env.PORT || 8000;
 

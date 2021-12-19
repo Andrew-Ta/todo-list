@@ -6,6 +6,7 @@ import UpdateTodo from "./updateTodo";
 
 function TodoCard({ data, handleDelete, handleEdit }){
     const { _id, title, description } = data;
+
     return (
         <li key={_id}>
             <div className="title-description">
@@ -23,13 +24,14 @@ function TodoCard({ data, handleDelete, handleEdit }){
 
 
 
-function ShowTodoList() {
+export function ShowTodoList() {
     const [todo, setTodo] = useState([]);
     const [open, setOpen] = useState(false);
     const [id, setId] = useState("");
     const [update, setUpdate] = useState(false);
 
-    useEffect(() => {
+    useEffect( 
+        function() {
         axios
             .get("http://localhost:8000/api/todo")
             .then((res) => {
@@ -39,7 +41,9 @@ function ShowTodoList() {
             .catch((err) => {
                 console.log(err)
             });
-    }, []);
+        }, 
+        [update]
+    );
 
     function handleEdit(e) {
         setId(e.tartget.name);
@@ -70,10 +74,10 @@ function ShowTodoList() {
                 <button className="button">New</button>
             </Link>
             <div className="contents">
-                <h2>TODO List</h2>
+                <h1>TODO List</h1>
                 <ul className="list-container">
                     {todo.map((data) => {
-                        <TodoCard data={data} handleDelete={handleDelete} />
+                        <TodoCard data={data} handleDelete={handleDelete} handleEdit={handleEdit} />
                     })}
                 </ul>
             </div>
@@ -95,7 +99,5 @@ function ShowTodoList() {
                 ""
             )}
         </section>
-    )
+    );
 }
-
-export default ShowTodoList;
