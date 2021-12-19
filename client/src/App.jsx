@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 import HomePage from 'pages/HomePage';
 import PageNotFound from 'pages/PageNotFound';
+import CreateTodo from 'pages/CreateTodoPage';
 
 
 
@@ -14,6 +15,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/"><HomePage/></Route>
+          <Route exact path="/create-todo"><CreateTodo/></Route>
           <Route path="*"><PageNotFound/></Route>
         </Switch>
       </Router>
