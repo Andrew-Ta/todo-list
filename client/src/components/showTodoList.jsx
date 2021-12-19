@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import UpdateTodo from "./updateTodo";
 
-function TodoCard({ data, handleDelete }){
+function TodoCard({ data, handleDelete, handleEdit }){
     const { _id, title, description } = data;
     return (
         <li key={_id}>
@@ -14,7 +14,7 @@ function TodoCard({ data, handleDelete }){
             </div>
 
             <div className="button-container">
-                <button name={_id} className="button">Edit</button>
+                <button name={_id} className="button" onClick={handleEdit}>Edit</button>
                 <button name={_id} className="button" onClick={handleDelete}>delete</button>
             </div>
         </li>
@@ -25,6 +25,9 @@ function TodoCard({ data, handleDelete }){
 
 function ShowTodoList() {
     const [todo, setTodo] = useState([]);
+    const [open, setOpen] = useState(false);
+    const [id, setId] = useState("");
+    const [update, setUpdate] = useState(false);
 
     useEffect(() => {
         axios
@@ -38,12 +41,27 @@ function ShowTodoList() {
             });
     }, []);
 
+    function handleEdit(e) {
+        setId(e.tartget.name);
+        setOpen(true);
+    }
+
+    function handleUpdate() {
+        console.log("update:", update, !update);
+        setUpdate(!update);
+    }
+
     function handleDelete(e) {
         axios.delete(`http://localhost:8000/api/todo/${e.target.name}`);
 
         setTodo((data) => {
             return data.filter((todo) => todo._id !== e.target.name);
         });
+    }
+
+    function handleClose() {
+        setId("");
+        setOpen(false); 
     }
 
     return (
@@ -59,6 +77,23 @@ function ShowTodoList() {
                     })}
                 </ul>
             </div>
+            {open ? (
+                <div className="update-container">
+                    <div className="update-contents">
+                        <p onClick={handleClose} className="close">
+                            &times;
+                        </p>
+
+                        <UpdateTodo
+                            _id={id}
+                            handleClose={handleClose}
+                            handleUpdate={handleUpdate}
+                        />
+                    </div>
+                </div>
+            ) : (
+                ""
+            )}
         </section>
     )
 }
