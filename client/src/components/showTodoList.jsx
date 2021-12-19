@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-function TodoCard({ data }){
+import UpdateTodo from "./updateTodo";
+
+function TodoCard({ data, handleDelete }){
     const { _id, title, description } = data;
     return (
         <li key={_id}>
@@ -12,14 +14,16 @@ function TodoCard({ data }){
             </div>
 
             <div className="button-container">
-                <button className="button">Edit</button>
-                <button className="button">Delete</button>
+                <button name={_id} className="button">Edit</button>
+                <button name={_id} className="button" onClick={handleDelete}>delete</button>
             </div>
         </li>
     );
 }
 
-export function ShowTodoList() {
+
+
+function ShowTodoList() {
     const [todo, setTodo] = useState([]);
 
     useEffect(() => {
@@ -34,6 +38,14 @@ export function ShowTodoList() {
             });
     }, []);
 
+    function handleDelete(e) {
+        axios.delete(`http://localhost:8000/api/todo/${e.target.name}`);
+
+        setTodo((data) => {
+            return data.filter((todo) => todo._id !== e.target.name);
+        });
+    }
+
     return (
         <section className="container">
             <Link to="/create-todo" className="button-new">
@@ -43,10 +55,12 @@ export function ShowTodoList() {
                 <h2>TODO List</h2>
                 <ul className="list-container">
                     {todo.map((data) => {
-                        <TodoCard data={data} />
+                        <TodoCard data={data} handleDelete={handleDelete} />
                     })}
                 </ul>
             </div>
         </section>
     )
 }
+
+export default ShowTodoList;
