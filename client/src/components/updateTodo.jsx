@@ -26,14 +26,11 @@ export function UpdateTodo({ _id, handleClose, handleUpdate }) {
     }
 
     return (
-        <form
-            className="form-container"
-            onSubmit={(e) => {
+        <form className="form-container" onSubmit={(e) => {
                 handleSubmit(e);
                 handleUpdate();
                 handleClose();
-            }}
-        >
+            }}>
             <label htmlFor="title" className="label">
                 Title
             </label>

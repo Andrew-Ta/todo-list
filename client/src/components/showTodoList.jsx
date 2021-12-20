@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import styled from "styled-components";
 import { UpdateTodo } from "./updateTodo";
 
 function TodoCard({ data, handleDelete, handleEdit }){
@@ -69,12 +69,12 @@ export function ShowTodoList() {
     }
 
     return (
-        <section className="container">
-            <Link to="/create-todo" className="button-new">
-                <button className="button">New</button>
-            </Link>
-            <section className="contents">
-                <h1>TODO</h1>
+        <MainPageStyles className="container">
+            <div className="contents">
+                <h1>Todo List</h1>            
+                <Link to="/create-todo" className="button-new">
+                    <button className="button">New</button>
+                </Link>
                 <ul className="list-container">
                     {todo.map((data) => (
                         <TodoCard
@@ -84,10 +84,10 @@ export function ShowTodoList() {
                         />
                     ))}
                 </ul>
-            </section>
+            </div>
 
             {open ? (
-                <section className="update-container">
+                <div className="update-container">
                     <div className="update-contents">
                         <p onClick={handleClose} className="close">
                             &times;
@@ -99,10 +99,35 @@ export function ShowTodoList() {
                             handleUpdate={handleUpdate}
                         />
                     </div>
-                </section>
+                </div>
             ) : (
                 ""
             )}
-        </section>
+        </MainPageStyles>
     );
 }
+
+const MainPageStyles = styled.section`
+    display: flex;
+    justify-content: center;
+    border: 1px solid gray;
+    border-radius: 5px;
+    text-align: center;
+    padding: 2rem;
+    margin: 5rem;
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    button {
+        /* Will change this to icons */
+        text-decoration: none;
+        color: #1f1c1c;
+        border: 2px solid black;
+        border-radius: 3px;
+        padding: 0.11rem 0.5rem 0.25rem 0.5rem;
+    }
+
+`
