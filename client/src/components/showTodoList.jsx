@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-import UpdateTodo from "./updateTodo";
+import { UpdateTodo } from "./updateTodo";
 
 function TodoCard({ data, handleDelete, handleEdit }){
     const { _id, title, description } = data;
@@ -15,8 +15,8 @@ function TodoCard({ data, handleDelete, handleEdit }){
             </div>
 
             <div className="button-container">
-                <button name={_id} className="button" onClick={handleEdit}>Edit</button>
-                <button name={_id} className="button" onClick={handleDelete}>delete</button>
+                <button className="button" name={_id} onClick={handleEdit}>Edit</button>
+                <button className="button" name={_id} onClick={handleDelete}>Delete</button>
             </div>
         </li>
     );
@@ -30,23 +30,23 @@ export function ShowTodoList() {
     const [id, setId] = useState("");
     const [update, setUpdate] = useState(false);
 
-    useEffect( 
-        function() {
-        axios
-            .get("http://localhost:8000/api/todo")
-            .then((res) => {
-                console.log(res.data);
-                setTodo(res.data);
-            })
-            .catch((err) => {
-                console.log(err)
-            });
-        }, 
+    useEffect(
+        function () {
+            axios
+                .get("http://localhost:8000/api/todo")
+                .then((res) => {
+                    console.log(res.data);
+                    setTodo(res.data);
+                })
+                .catch((err) => {
+                    console.log(err.message);
+                });
+        },
         [update]
     );
 
     function handleEdit(e) {
-        setId(e.tartget.name);
+        setId(e.target.name); 
         setOpen(true);
     }
 
@@ -65,7 +65,7 @@ export function ShowTodoList() {
 
     function handleClose() {
         setId("");
-        setOpen(false); 
+        setOpen(false);
     }
 
     return (
@@ -73,16 +73,21 @@ export function ShowTodoList() {
             <Link to="/create-todo" className="button-new">
                 <button className="button">New</button>
             </Link>
-            <div className="contents">
-                <h1>TODO List</h1>
+            <section className="contents">
+                <h1>TODO</h1>
                 <ul className="list-container">
-                    {todo.map((data) => {
-                        <TodoCard data={data} handleDelete={handleDelete} handleEdit={handleEdit} />
-                    })}
+                    {todo.map((data) => (
+                        <TodoCard
+                            data={data}
+                            handleEdit={handleEdit}
+                            handleDelete={handleDelete}
+                        />
+                    ))}
                 </ul>
-            </div>
+            </section>
+
             {open ? (
-                <div className="update-container">
+                <section className="update-container">
                     <div className="update-contents">
                         <p onClick={handleClose} className="close">
                             &times;
@@ -94,7 +99,7 @@ export function ShowTodoList() {
                             handleUpdate={handleUpdate}
                         />
                     </div>
-                </div>
+                </section>
             ) : (
                 ""
             )}

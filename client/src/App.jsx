@@ -15,14 +15,14 @@ function App() {
   return (
     <div>
       <Router>
-        <Switch>
+        {/* <Switch> */}
           <Route exact path="/" component={ShowTodoList} />          
           <Route exact path="/create-todo" component={CreateTodo} />
           {/* <Route exact path="/"><HomePage/></Route>
           <Route exact path="/create-todo"><CreateTodo/></Route> */}
 
           {/* <Route path="*"><PageNotFound/></Route> */}
-        </Switch>
+        {/* </Switch> */}
       </Router>
     </div>
   );
