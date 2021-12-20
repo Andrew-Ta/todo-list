@@ -8,17 +8,16 @@ function TodoCard({ data, handleDelete, handleEdit }){
     const { _id, title, description } = data;
 
     return (
-        <li key={_id}>
-            <div className="title-description">
-                <h3>{title}</h3>
+        <ListItemStyles key={_id}>
+            <CardTopStyles>
+                <h3>{title}</h3>                      
                 <p>{description}</p>
-            </div>
-
-            <div className="button-container">
-                <button className="button" name={_id} onClick={handleEdit}>Edit</button>
-                <button className="button" name={_id} onClick={handleDelete}>Delete</button>
-            </div>
-        </li>
+                <div>
+                    <button className="button" name={_id} onClick={handleEdit}>Edit</button>
+                    <button className="button" name={_id} onClick={handleDelete}>Delete</button>                    
+                </div>     
+            </CardTopStyles>
+        </ListItemStyles>
     );
 }
 
@@ -69,12 +68,15 @@ export function ShowTodoList() {
     }
 
     return (
-        <MainPageStyles className="container">
-            <div className="contents">
-                <h1>Todo List</h1>            
-                <Link to="/create-todo" className="button-new">
-                    <button className="button">New</button>
-                </Link>
+        <MainPageStyles>
+            <ContentStyles>
+                <h1>Todo List</h1>
+                <div>
+                    <Link to="/create-todo" className="button-new">
+                        <NewTodoButton>New</NewTodoButton>
+                    </Link>
+                </div>            
+
                 <ul className="list-container">
                     {todo.map((data) => (
                         <TodoCard
@@ -84,15 +86,12 @@ export function ShowTodoList() {
                         />
                     ))}
                 </ul>
-            </div>
+            </ContentStyles>
 
             {open ? (
                 <div className="update-container">
                     <div className="update-contents">
-                        <p onClick={handleClose} className="close">
-                            &times;
-                        </p>
-
+                        <p onClick={handleClose} className="close">&times;</p>
                         <UpdateTodo
                             _id={id}
                             handleClose={handleClose}
@@ -109,25 +108,44 @@ export function ShowTodoList() {
 
 const MainPageStyles = styled.section`
     display: flex;
-    justify-content: center;
-    border: 1px solid gray;
-    border-radius: 5px;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    padding: 2rem;
-    margin: 5rem;
+    padding: 0;
+    margin: 0;
 
     h1 {
         font-size: 2rem;
         margin-bottom: 2rem;
+        color: #fff;
     }
 
-    button {
-        /* Will change this to icons */
-        text-decoration: none;
-        color: #1f1c1c;
-        border: 2px solid black;
-        border-radius: 3px;
-        padding: 0.11rem 0.5rem 0.25rem 0.5rem;
-    }
+`
 
+const ContentStyles = styled.div`
+    margin: 5rem;
+    padding: 2rem;
+    width: 90%;
+    /* border: 1px solid gray; */
+    border-radius: 5px;
+    min-height: 5rem;
+    background: linear-gradient(90deg,#292828,#2e2b29);
+`
+
+const ListItemStyles = styled.li`
+    align-items: center;
+    margin: 4px auto;
+    color: #fff;
+    background: linear-gradient(90deg,#805b36,#68615e);
+    padding: 16px;
+    border-radius: 5px;
+`
+
+const CardTopStyles = styled.div`
+    display: flex;
+    justify-content: space-between;
+`
+
+const NewTodoButton = styled.button`
+    margin-bottom: 1rem;
 `
