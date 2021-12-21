@@ -9,7 +9,7 @@ import { CreateTodo } from 'components/createTodo';
 
 function App() {
   return (
-    <div>
+    <MainDiv>
       <Router>
         <Switch>
           <Route exact path="/" component={ShowTodoList} />          
@@ -17,8 +17,15 @@ function App() {
           <Route path="*"><PageNotFound/></Route>
         </Switch>
       </Router>
-    </div>
+    </MainDiv>
   );
 }
 
 export default App;
+
+const MainDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+`

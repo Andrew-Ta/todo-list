@@ -9,16 +9,14 @@ function TodoCard({ data, handleDelete, handleEdit }){
 
     return (
         <ListItemStyles key={_id}>
-            <CardTopStyles>
-                <TodoDivStyles>                
-                    <h3>{title}</h3>  
-                    <p>{description}</p>
-                </TodoDivStyles>
-                <ButtonDivStyles>
-                    <EditTodoButton className="button" name={_id} onClick={handleEdit}>Edit</EditTodoButton>
-                    <DeleteTodoButton className="button" name={_id} onClick={handleDelete}>Delete</DeleteTodoButton>                    
-                </ButtonDivStyles>     
-            </CardTopStyles>
+            <TodoDivStyles>                
+                <h3>{title}</h3>  
+                <p>{description}</p>
+            </TodoDivStyles>
+            <ButtonDivStyles>
+                <EditTodoButton className="button" name={_id} onClick={handleEdit}>Edit</EditTodoButton>
+                <DeleteTodoButton className="button" name={_id} onClick={handleDelete}>Delete</DeleteTodoButton>                    
+            </ButtonDivStyles>     
         </ListItemStyles>
     );
 }
@@ -70,15 +68,15 @@ export function ShowTodoList() {
     }
 
     return (
-        <MainPageStyles>
-            <ContentStyles>
+        <MainPageStyles>       
+            <header>
                 <h1>Todo List</h1>
-                <div>
-                    <div>
-                        <CreateTodo _id={id} handleUpdate={handleUpdate} />
-                    </div>
-                </div>    
-                <ul className="list-container">
+            </header>         
+            <CreateTodoDiv>
+                <CreateTodo _id={id} handleUpdate={handleUpdate} />
+            </CreateTodoDiv>    
+            <ContentStyles>
+                <ul>
                     {todo.map((data) => (
                         <TodoCard
                             data={data}
@@ -88,18 +86,18 @@ export function ShowTodoList() {
                     ))}
                 </ul>
             </ContentStyles>
-            {open ? (
-                <div className="update-container">
-                    <div className="update-contents">
-                        <p onClick={handleClose} className="close">&times;</p>
-                        <UpdateTodo _id={id}
-                                    handleClose={handleClose}
-                                handleUpdate={handleUpdate} />
-                    </div>
+        {open ? (
+            <UpdateDiv>
+                <div className="update-contents">
+                    <p onClick={handleClose} className="close">&times;</p>
+                    <UpdateTodo _id={id}
+                                handleClose={handleClose}
+                            handleUpdate={handleUpdate} />
                 </div>
-            ) : (
-                ""
-            )}
+            </UpdateDiv>
+        ) : (
+            ""
+        )}
         </MainPageStyles>
     );
 }
@@ -107,49 +105,65 @@ export function ShowTodoList() {
 const MainPageStyles = styled.section`
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
+    /* justify-content: center; */
     text-align: center;
-    padding: 0;
-    margin: 0;
     font-family: Arial, Helvetica, sans-serif;
+    width: 90%;
+    border-radius: 10px;
+    min-height: 11rem;
+    background: linear-gradient(90deg,#292828,#2e2b29);
+    padding: 2rem;
 
-    h1 {
-        font-size: 2rem;
+    header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2.5rem;
         margin-bottom: 2rem;
-        color: #fff;
+        color: #ffffff;
+        background: linear-gradient(180deg,#847d7d,#805b36);
+        width: 100%;
+        height: 5rem;
+        border-radius: 5px;
+    }
+`
+
+//CREATE TODO SECTION
+const CreateTodoDiv = styled.div`
+
+`
+
+// TODO ITEM SECTION
+const ContentStyles = styled.div`
+    display: flex;
+    flex: 1;
+    overflow: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    ul {
+        width: 100%;
     }
 
 `
 
-const ContentStyles = styled.div`
-    margin: 5rem;
-    padding: 2rem;
-    width: 90%;
-    /* border: 1px solid gray; */
-    border-radius: 10px;
-    min-height: 11rem;
-    background: linear-gradient(90deg,#292828,#2e2b29);
-`
-
 const ListItemStyles = styled.li`
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    margin: 4px auto;
+    margin-bottom: 0.5rem;
     color: #fff;
     background: linear-gradient(90deg,#805b36,#68615e);
     padding: 16px;
-    border-radius: 5px;
+    border-radius: 5px; 
 `
-
-const CardTopStyles = styled.div`
-    display: flex;
-    justify-content: space-between;
-`
-
 const TodoDivStyles = styled.div`
     display:flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 70%;
+    margin-right: 1rem;
 
     h3 {
         margin-bottom: 0.5rem;
@@ -179,7 +193,8 @@ const DeleteTodoButton = styled.button`
     width: 64px;
 `
 
-const DescriptionStyles = styled.p`
+// UPDATE SECTION
+const UpdateDiv = styled.div`
 
 `
 

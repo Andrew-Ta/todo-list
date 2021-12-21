@@ -31,36 +31,34 @@ export function CreateTodo() {
     }
 
     return (
-        <section>
-            <NewTodoFormStyles onSubmit={handleSubmit} className="form-container" noValidate>
-                <label className="label" htmlFor="title">
-                    <input
-                    type="text"
-                    name="title"
-                    value={data.title}
-                    onChange={handleChange}
-                    className="input"
-                    placeholder="Title"/>
-                </label>
-                <label className="label" htmlFor="description">
-                    <textarea
-                    type="text"
-                    name="description"
-                    value={data.description}
-                    onChange={handleChange}
-                    className="input"
-                    placeholder="Description"
-                     />
-                </label>
-                <button type="submit" className="button">
-                    Add
-                </button>
-            </NewTodoFormStyles>
-        </section>
+        <NewTodoForm onSubmit={handleSubmit} className="form-container" noValidate>
+            <label className="label" htmlFor="title">
+                <input
+                type="text"
+                name="title"
+                value={data.title}
+                onChange={handleChange}
+                className="input"
+                placeholder="Title"/>
+            </label>
+            <label className="label" htmlFor="description">
+                <textarea
+                type="text"
+                name="description"
+                value={data.description}
+                onChange={handleChange}
+                className="input"
+                placeholder="Description"
+                    />
+            </label>
+            <button type="submit" className="button">
+                Add
+            </button>
+        </NewTodoForm>
     );
 }
 
-const NewTodoFormStyles = styled.form`
+const NewTodoForm = styled.form`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -71,19 +69,23 @@ const NewTodoFormStyles = styled.form`
         font-size: 1rem;
         border: none;
         padding: 0.5rem 1rem;
-        border-radius: 0.5rem;
-        margin-bottom: 1rem;
-
+        border-top-right-radius: 0.5rem;
+        border-top-left-radius: 0.5rem;
+        margin-bottom: 0.35rem;
+        width: 320px;
+        background: linear-gradient(180deg,#fff,#e7f0db);
     }
 
     textarea {
+        font-family: Arial, Helvetica, sans-serif;
         resize: none;
         font-size: 1rem;
         border: none;
         padding: 0.5rem 1rem;
-        border-radius: 0.5rem;
-        margin-bottom: 0.75rem;
-        min-height: 3rem;
+        margin-bottom: 0.15rem;
+        min-height: 6rem;
+        width: 320px;
+        background: linear-gradient(180deg,#e7f0db,#e7f0db);
     }
     
     button {
@@ -93,8 +95,12 @@ const NewTodoFormStyles = styled.form`
         padding: 0.25rem 1rem;
         text-align: center;
         text-decoration: none;
-        border-radius: 5px;
+        border-bottom-right-radius: 0.5rem;
+        border-bottom-left-radius: 0.5rem;
         margin-bottom: 1rem;
-        width: 64px;
+        width: 320px;
+        height: 32px;
+        font-size: 1.1rem;
+
     }
 `
