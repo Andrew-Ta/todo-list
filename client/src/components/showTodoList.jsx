@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { UpdateTodo } from "./updateTodo";
 import { CreateTodo } from "./createTodo" 
@@ -11,12 +10,14 @@ function TodoCard({ data, handleDelete, handleEdit }){
     return (
         <ListItemStyles key={_id}>
             <CardTopStyles>
-                <h3>{title}</h3>                      
-                <p>{description}</p>
-                <div>
+                <TodoDivStyles>                
+                    <h3>{title}</h3>  
+                    <p>{description}</p>
+                </TodoDivStyles>
+                <ButtonDivStyles>
                     <EditTodoButton className="button" name={_id} onClick={handleEdit}>Edit</EditTodoButton>
                     <DeleteTodoButton className="button" name={_id} onClick={handleDelete}>Delete</DeleteTodoButton>                    
-                </div>     
+                </ButtonDivStyles>     
             </CardTopStyles>
         </ListItemStyles>
     );
@@ -72,21 +73,11 @@ export function ShowTodoList() {
         <MainPageStyles>
             <ContentStyles>
                 <h1>Todo List</h1>
-                {/* <div>
-                    <Link to="/create-todo" className="button-new">
-                        <NewTodoButton>New</NewTodoButton>
-                    </Link>
-                </div> */}
-
                 <div>
                     <div>
-                        <CreateTodo
-                            _id={id}
-                            handleUpdate={handleUpdate}
-                        />
+                        <CreateTodo _id={id} handleUpdate={handleUpdate} />
                     </div>
                 </div>    
-
                 <ul className="list-container">
                     {todo.map((data) => (
                         <TodoCard
@@ -97,16 +88,13 @@ export function ShowTodoList() {
                     ))}
                 </ul>
             </ContentStyles>
-
             {open ? (
                 <div className="update-container">
                     <div className="update-contents">
                         <p onClick={handleClose} className="close">&times;</p>
-                        <UpdateTodo
-                            _id={id}
-                            handleClose={handleClose}
-                            handleUpdate={handleUpdate}
-                        />
+                        <UpdateTodo _id={id}
+                                    handleClose={handleClose}
+                                handleUpdate={handleUpdate} />
                     </div>
                 </div>
             ) : (
@@ -123,6 +111,7 @@ const MainPageStyles = styled.section`
     text-align: center;
     padding: 0;
     margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
 
     h1 {
         font-size: 2rem;
@@ -137,8 +126,8 @@ const ContentStyles = styled.div`
     padding: 2rem;
     width: 90%;
     /* border: 1px solid gray; */
-    border-radius: 5px;
-    min-height: 7rem;
+    border-radius: 10px;
+    min-height: 11rem;
     background: linear-gradient(90deg,#292828,#2e2b29);
 `
 
@@ -156,23 +145,49 @@ const CardTopStyles = styled.div`
     justify-content: space-between;
 `
 
+const TodoDivStyles = styled.div`
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 70%;
+
+    h3 {
+        margin-bottom: 0.5rem;
+    }
+`
+
 const EditTodoButton = styled.button`
-    background-color: #cac713; /* Green */
+    background-color: #888604; /* Green */
     border: none;
     color: white;
     padding: 0.25rem 1rem;
     text-align: center;
     text-decoration: none;
     border-radius: 5px;
-    margin-right: 1rem;
+    width: 64px;
+    margin-bottom: 0.5rem;
 `
 
 const DeleteTodoButton = styled.button`
-    background-color: #b90b0b; /* Green */
+    background-color: #6b0202; /* Green */
     border: none;
     color: white;
     padding: 0.25rem 1rem;
     text-align: center;
     text-decoration: none;
     border-radius: 5px;
+    width: 64px;
+`
+
+const DescriptionStyles = styled.p`
+
+`
+
+const ButtonDivStyles = styled.div`
+    display:flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 30%;
+
+
 `

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 
@@ -32,12 +31,7 @@ export function CreateTodo() {
     }
 
     return (
-        <section className="container">
-            {/* <Link to="/" className="button-back">
-                <button type="button" className="button">
-                    back
-                </button>
-            </Link> */}
+        <section>
             <NewTodoFormStyles onSubmit={handleSubmit} className="form-container" noValidate>
                 <label className="label" htmlFor="title">
                     <input
@@ -48,7 +42,6 @@ export function CreateTodo() {
                     className="input"
                     placeholder="Title"/>
                 </label>
-
                 <label className="label" htmlFor="description">
                     <textarea
                     type="text"
@@ -59,7 +52,6 @@ export function CreateTodo() {
                     placeholder="Description"
                      />
                 </label>
-
                 <button type="submit" className="button">
                     Add
                 </button>
@@ -73,27 +65,29 @@ const NewTodoFormStyles = styled.form`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
 
     input {
         font-size: 1rem;
         border: none;
-        padding: 0.15rem 1rem;
+        padding: 0.5rem 1rem;
         border-radius: 0.5rem;
         margin-bottom: 1rem;
+
     }
 
     textarea {
         resize: none;
         font-size: 1rem;
         border: none;
-        padding: 0.15rem 1rem;
+        padding: 0.5rem 1rem;
         border-radius: 0.5rem;
         margin-bottom: 0.75rem;
         min-height: 3rem;
     }
     
     button {
-        background-color: #4CAF50; /* Green */
+        background-color: #017505; /* Green */
         border: none;
         color: white;
         padding: 0.25rem 1rem;
@@ -101,5 +95,6 @@ const NewTodoFormStyles = styled.form`
         text-decoration: none;
         border-radius: 5px;
         margin-bottom: 1rem;
+        width: 64px;
     }
 `
