@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import styled from "styled-components";
 
 export function CreateTodo() {
     const [data, setData] = useState({ title: "", description: "" });
@@ -10,7 +11,7 @@ export function CreateTodo() {
     }
 
     function handleSubmit(e) {
-        e.preventDefault();
+        // e.preventDefault();
 
         const todo = {
             title: data.title,
@@ -32,42 +33,73 @@ export function CreateTodo() {
 
     return (
         <section className="container">
-            <Link to="/" className="button-back">
+            {/* <Link to="/" className="button-back">
                 <button type="button" className="button">
                     back
                 </button>
-            </Link>
-            <section className="contents">
-                <form
-                    onSubmit={handleSubmit}
-                    className="form-container"
-                    noValidate
-                >
-                    <label className="label" htmlFor="title">
-                        Title
-                    </label>
+            </Link> */}
+            <NewTodoFormStyles onSubmit={handleSubmit} className="form-container" noValidate>
+                <label className="label" htmlFor="title">
                     <input
-                        type="text"
-                        name="title"
-                        value={data.title}
-                        onChange={handleChange}
-                        className="input"
-                    />
-                    <label className="label" htmlFor="description">
-                        Description
-                    </label>
-                    <input
-                        type="text"
-                        name="description"
-                        value={data.description}
-                        onChange={handleChange}
-                        className="input"
-                    />
-                    <button type="submit" className="button">
-                        create todo
-                    </button>
-                </form>
-            </section>
+                    type="text"
+                    name="title"
+                    value={data.title}
+                    onChange={handleChange}
+                    className="input"
+                    placeholder="Title"/>
+                </label>
+
+                <label className="label" htmlFor="description">
+                    <textarea
+                    type="text"
+                    name="description"
+                    value={data.description}
+                    onChange={handleChange}
+                    className="input"
+                    placeholder="Description"
+                     />
+                </label>
+
+                <button type="submit" className="button">
+                    Add
+                </button>
+            </NewTodoFormStyles>
         </section>
     );
 }
+
+const NewTodoFormStyles = styled.form`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    input {
+        font-size: 1rem;
+        border: none;
+        padding: 0.15rem 1rem;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    textarea {
+        resize: none;
+        font-size: 1rem;
+        border: none;
+        padding: 0.15rem 1rem;
+        border-radius: 0.5rem;
+        margin-bottom: 0.75rem;
+        min-height: 3rem;
+    }
+    
+    button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 0.25rem 1rem;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-bottom: 1rem;
+    }
+`

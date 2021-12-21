@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { UpdateTodo } from "./updateTodo";
+import { CreateTodo } from "./createTodo" 
 
 function TodoCard({ data, handleDelete, handleEdit }){
     const { _id, title, description } = data;
@@ -13,8 +14,8 @@ function TodoCard({ data, handleDelete, handleEdit }){
                 <h3>{title}</h3>                      
                 <p>{description}</p>
                 <div>
-                    <button className="button" name={_id} onClick={handleEdit}>Edit</button>
-                    <button className="button" name={_id} onClick={handleDelete}>Delete</button>                    
+                    <EditTodoButton className="button" name={_id} onClick={handleEdit}>Edit</EditTodoButton>
+                    <DeleteTodoButton className="button" name={_id} onClick={handleDelete}>Delete</DeleteTodoButton>                    
                 </div>     
             </CardTopStyles>
         </ListItemStyles>
@@ -71,11 +72,20 @@ export function ShowTodoList() {
         <MainPageStyles>
             <ContentStyles>
                 <h1>Todo List</h1>
-                <div>
+                {/* <div>
                     <Link to="/create-todo" className="button-new">
                         <NewTodoButton>New</NewTodoButton>
                     </Link>
-                </div>            
+                </div> */}
+
+                <div>
+                    <div>
+                        <CreateTodo
+                            _id={id}
+                            handleUpdate={handleUpdate}
+                        />
+                    </div>
+                </div>    
 
                 <ul className="list-container">
                     {todo.map((data) => (
@@ -128,7 +138,7 @@ const ContentStyles = styled.div`
     width: 90%;
     /* border: 1px solid gray; */
     border-radius: 5px;
-    min-height: 5rem;
+    min-height: 7rem;
     background: linear-gradient(90deg,#292828,#2e2b29);
 `
 
@@ -146,6 +156,23 @@ const CardTopStyles = styled.div`
     justify-content: space-between;
 `
 
-const NewTodoButton = styled.button`
-    margin-bottom: 1rem;
+const EditTodoButton = styled.button`
+    background-color: #cac713; /* Green */
+    border: none;
+    color: white;
+    padding: 0.25rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-right: 1rem;
+`
+
+const DeleteTodoButton = styled.button`
+    background-color: #b90b0b; /* Green */
+    border: none;
+    color: white;
+    padding: 0.25rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
 `
