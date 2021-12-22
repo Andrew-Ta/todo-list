@@ -73,6 +73,7 @@ export function ShowTodoList() {
                 <h1>Todo List</h1>
             </header>         
             <CreateTodoDiv>
+                <h2>New Todo</h2>
                 <CreateTodo _id={id} handleUpdate={handleUpdate} />
             </CreateTodoDiv>    
             <ContentStyles>
@@ -88,12 +89,11 @@ export function ShowTodoList() {
             </ContentStyles>
         {open ? (
             <UpdateDiv>
-                <div className="update-contents">
-                    <p onClick={handleClose} className="close">&times;</p>
-                    <UpdateTodo _id={id}
-                                handleClose={handleClose}
-                            handleUpdate={handleUpdate} />
-                </div>
+                <h2>Edit Todo</h2>
+                <p onClick={handleClose} className="close">Minimize</p>
+                <UpdateTodo _id={id}
+                            handleClose={handleClose}
+                        handleUpdate={handleUpdate} />
             </UpdateDiv>
         ) : (
             ""
@@ -109,7 +109,7 @@ const MainPageStyles = styled.section`
     /* justify-content: center; */
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
-    width: 90%;
+    width: 70%;
     border-radius: 10px;
     min-height: 11rem;
     background: linear-gradient(90deg,#292828,#2e2b29);
@@ -131,7 +131,13 @@ const MainPageStyles = styled.section`
 
 //CREATE TODO SECTION
 const CreateTodoDiv = styled.div`
-
+    h2 {
+        color: white;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    margin-bottom: 2rem;
 `
 
 // TODO ITEM SECTION
@@ -171,7 +177,7 @@ const TodoDivStyles = styled.div`
 `
 
 const EditTodoButton = styled.button`
-    background-color: #888604; /* Green */
+    background-color: #c3b219; /* Green */
     border: none;
     color: white;
     padding: 0.25rem 1rem;
@@ -195,7 +201,26 @@ const DeleteTodoButton = styled.button`
 
 // UPDATE SECTION
 const UpdateDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
+    h2 {
+        color: white;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    p {
+        width: 320px;
+        background-color: #f8a305;
+        border-top-right-radius: 0.5rem;
+        border-top-left-radius: 0.5rem;
+        color: white;
+        padding: 0.25rem 1rem;
+        text-align: center;
+        text-decoration: none;
+    }
 `
 
 const ButtonDivStyles = styled.div`

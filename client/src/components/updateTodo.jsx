@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import styled from "styled-components";
 
 export function UpdateTodo({ _id, handleClose, handleUpdate }) {
     const [data, setData] = useState({ title: "", description: "" });
@@ -26,33 +27,80 @@ export function UpdateTodo({ _id, handleClose, handleUpdate }) {
     }
 
     return (
-        <form className="form-container" onSubmit={(e) => {
+        <UpdateForm onSubmit={(e) => {
                 handleSubmit(e);
                 handleUpdate();
                 handleClose();
             }}>
+
             <label htmlFor="title" className="label">
-                Title
-            </label>
-            <input
+                <input
                 type="text"
                 name="title"
                 className="input"
                 onChange={handleChange}
-            />
-            <label htmlFor="description" className="label">
-                Description
+                placeholder="Title"/>
             </label>
-            <input
+            <textarea
                 type="text"
                 name="description"
                 className="input"
                 onChange={handleChange}
+                placeholder="Descrription"
             />
             <button type="submit" className="button">
-                Submit
+                Update
             </button>
-        </form>
+        </UpdateForm>
     );
 }
 
+const UpdateForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+
+
+    input {
+        font-size: 1rem;
+        border: none;
+        padding: 0.5rem 1rem;
+        /* border-top-right-radius: 0.5rem; */
+        /* border-top-left-radius: 0.5rem; */
+        margin-top: 0.35rem;
+        margin-bottom: 0.35rem;
+        width: 320px;
+        background: linear-gradient(180deg,#fff,#c3c3ae);
+    }
+
+    textarea {
+        font-family: Arial, Helvetica, sans-serif;
+        resize: none;
+        font-size: 1rem;
+        border: none;
+        padding: 0.5rem 1rem;
+        margin-bottom: 0.35rem;
+        min-height: 6rem;
+        width: 320px;
+        background: linear-gradient(180deg,#c3c3ae,#c3c3ae);
+    }
+    
+    button {
+        background-color: #c3b219; /* Green */
+        border: none;
+        color: white;
+        padding: 0.25rem 1rem;
+        text-align: center;
+        text-decoration: none;
+        border-bottom-right-radius: 0.5rem;
+        border-bottom-left-radius: 0.5rem;
+        margin-bottom: 1rem;
+        width: 320px;
+        height: 32px;
+        font-size: 1.1rem;
+
+    }
+
+`
