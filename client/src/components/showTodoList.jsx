@@ -122,17 +122,18 @@ const MainPageStyles = styled.section`
         font-size: 2.5rem;
         margin-bottom: 2rem;
         color: #ffffff;
-        background: linear-gradient(180deg,#847d7d,#805b36);
+        background: linear-gradient(180deg,#847d7d,#8d8b8a);
         width: 100%;
         height: 5rem;
         border-radius: 5px;
+        
     }
 `
 
 //CREATE TODO SECTION
 const CreateTodoDiv = styled.div`
     h2 {
-        color: white;
+        color: #fff;
         font-size: 2rem;
         margin-bottom: 1rem;
     }
