@@ -71,11 +71,26 @@ export function ShowTodoList() {
         <MainPageStyles>       
             <header>
                 <h1>Todo List</h1>
-            </header>         
-            <CreateTodoDiv>
-                <h2>New Todo</h2>
-                <CreateTodo _id={id} handleUpdate={handleUpdate} />
-            </CreateTodoDiv>    
+            </header>
+
+            <CreateUpdateDiv>
+                <CreateTodoDiv>
+                    <h2>New Todo</h2>
+                    <CreateTodo _id={id} handleUpdate={handleUpdate} />
+                </CreateTodoDiv>
+                {open ? (
+                <UpdateDiv>
+                    <h2>Edit Todo</h2>
+                    <p onClick={handleClose} className="close">Minimize</p>
+                    <UpdateTodo _id={id}
+                                handleClose={handleClose}
+                            handleUpdate={handleUpdate} />
+                </UpdateDiv>
+                ) : (
+                    ""
+                )}    
+            </CreateUpdateDiv>         
+            
             <ContentStyles>
                 <ul>
                     {todo.map((data) => (
@@ -87,7 +102,7 @@ export function ShowTodoList() {
                     ))}
                 </ul>
             </ContentStyles>
-        {open ? (
+        {/* {open ? (
             <UpdateDiv>
                 <h2>Edit Todo</h2>
                 <p onClick={handleClose} className="close">Minimize</p>
@@ -97,7 +112,7 @@ export function ShowTodoList() {
             </UpdateDiv>
         ) : (
             ""
-        )}
+        )} */}
         </MainPageStyles>
     );
 }
@@ -130,6 +145,12 @@ const MainPageStyles = styled.section`
     }
 `
 
+const CreateUpdateDiv = styled.div`
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+`
+
 //CREATE TODO SECTION
 const CreateTodoDiv = styled.div`
     h2 {
@@ -139,6 +160,30 @@ const CreateTodoDiv = styled.div`
     }
     
     margin-bottom: 2rem;
+`
+
+// UPDATE SECTION
+const UpdateDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h2 {
+        color: white;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    p {
+        width: 320px;
+        background-color: #f8a305;
+        border-top-right-radius: 0.5rem;
+        border-top-left-radius: 0.5rem;
+        color: white;
+        padding: 0.25rem 1rem;
+        text-align: center;
+        text-decoration: none;
+    }
 `
 
 // TODO ITEM SECTION
@@ -200,29 +245,7 @@ const DeleteTodoButton = styled.button`
     width: 64px;
 `
 
-// UPDATE SECTION
-const UpdateDiv = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 
-    h2 {
-        color: white;
-        font-size: 2rem;
-        margin-bottom: 1rem;
-    }
-
-    p {
-        width: 320px;
-        background-color: #f8a305;
-        border-top-right-radius: 0.5rem;
-        border-top-left-radius: 0.5rem;
-        color: white;
-        padding: 0.25rem 1rem;
-        text-align: center;
-        text-decoration: none;
-    }
-`
 
 const ButtonDivStyles = styled.div`
     display:flex;
