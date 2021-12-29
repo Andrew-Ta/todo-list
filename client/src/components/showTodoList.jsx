@@ -124,7 +124,7 @@ const MainPageStyles = styled.section`
     /* justify-content: center; */
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
-    width: 70%;
+    width: 50%;
     border-radius: 10px;
     min-height: 11rem;
     background: linear-gradient(90deg,#292828,#2e2b29);
