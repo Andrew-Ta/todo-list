@@ -4,16 +4,19 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-const db = process.env.MONGO_URI;
+// const db = process.env.MONGO_URI;
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(db, {
+        await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost/todo-list', {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
 
-        console.log("MongoDB is connected");
+        // Listener to see if mongodb connetion was made
+        mongoose.connection.on('connected', () => {console.log('Mongoose is connected!!!!!')});
+        mongoose.set('debug', true);
+        // console.log("MongoDB is connected");
     } catch (err) {
         console.error(err.message);
         process.exit(1);
