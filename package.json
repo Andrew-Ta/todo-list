@@ -23,9 +23,7 @@
     "express": "^4.17.1",
     "mongoose": "^6.0.13",
     "concurrently": "^7.0.0",
-    "axios": "0.25.0"
-  },
-  "devDependencies": {
+    "axios": "0.25.0",
     "nodemon": "^2.0.15"
   }
 }
